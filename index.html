@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+      }
+      p {
+        line-height: 0rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h2><b>1000 bulbs</b></h2>
+
+    <p>
+      There are 1000 light bulbs and 1000 persons. All light bulbs are initially
+      off. Person 1 goes flipping light bulb 1, 2, 3, 4, … person 2 then flips
+    </p>
+    <p>
+      2, 4, 6, 8, … person 3 then 3, 6, 9, … etc until all 1000 persons have
+      done this.Enter the number of a bulb and see whether it's on or off
+    </p>
+    <input type="number" id="number" value="" />
+    <input type="button" value="Check" onclick="getOnBulb()" /><br />
+    <p id="displayOn"></p>
+    <br />
+    <p id="display"></p>
+
+    <script>
+      function getOnBulb() {
+        let inputObj = document.getElementById("number");
+        let displayOnObj = document.getElementById("displayOn");
+        let displayObj = document.getElementById("display");
+        inputObj = inputObj.value;
+
+        //create bulb array
+        let bulb = new Array();
+        let onBulb = new Array();
+        //populate the array with numbers 1 through 1000
+        for (let i = 0; i < 1000; i++) {
+          bulb.push(i + 1);
+          //since only numbers that are squares will be on at the end(do the math, its true), set squares to on
+          //anything else is off
+          if (bulb[i] % Math.sqrt(bulb[i]) === 0) {
+            bulb[i] = "on";
+          } else {
+            bulb[i] = "off";
+          }
+        }
+        //allow user check if a bulb is on or off
+        if (bulb[inputObj - 1] === "on") {
+          displayOnObj.innerHTML = "Yeah this bulb is on";
+        } else {
+          displayOnObj.innerHTML = "Na this bulb aint on";
+        }
+        //display the number of bulbs that'll be on at the end of the day
+        bulb.forEach((item) => {
+          if (item === "on") {
+            onBulb.push(item);
+          }
+        });
+        displayObj.innerHTML = `${onBulb.length} bulbs are on after all 1000 persons have gone by `;
+      }
+    </script>
+  </body>
+</html>
